@@ -69,7 +69,7 @@
 	var button = document.querySelector('button');
 	var bothEnabled = _rx.Observable.combineLatest(usernameEnabled, fullnameEnabled, and);
 
-	var buttonEnabled = new _rx2['default'].BehaviorSubject(false);
+	var buttonEnabled = new _rx.BehaviorSubject(false);
 	bothEnabled.subscribe(buttonEnabled);
 	buttonEnabled.subscribe(function (enabled) {
 	  return button.disabled = !enabled;

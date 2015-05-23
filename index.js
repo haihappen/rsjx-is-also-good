@@ -1,4 +1,4 @@
-import Rx, { Observable, BehaviourSubject } from 'rx';
+import Rx, { Observable, BehaviorSubject } from 'rx';
 
 
 
@@ -20,6 +20,6 @@ let button = document.querySelector('button');
 let bothEnabled = Observable.combineLatest(usernameEnabled, fullnameEnabled, and);
 
 
-let buttonEnabled = new Rx.BehaviorSubject(false);
+let buttonEnabled = new BehaviorSubject(false);
 bothEnabled.subscribe(buttonEnabled);
 buttonEnabled.subscribe((enabled) => button.disabled = !enabled);

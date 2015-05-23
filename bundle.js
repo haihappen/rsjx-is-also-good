@@ -62,15 +62,15 @@
 	  return a && b;
 	};
 
-	var usernameEnabled = _rx.Observable.fromEvent(document.querySelector('input[name=username]'), 'keyup').map(targetValue).map(presence);
+	var usernamePresence = _rx.Observable.fromEvent(document.querySelector('input[name=username]'), 'keyup').map(targetValue).map(presence);
 
-	var fullnameEnabled = _rx.Observable.fromEvent(document.querySelector('input[name=fullname]'), 'keyup').map(targetValue).map(presence);
+	var fullnamePresence = _rx.Observable.fromEvent(document.querySelector('input[name=fullname]'), 'keyup').map(targetValue).map(presence);
 
 	var button = document.querySelector('button');
-	var bothEnabled = _rx.Observable.combineLatest(usernameEnabled, fullnameEnabled, and);
+	var bothPresence = _rx.Observable.combineLatest(usernamePresence, fullnamePresence, and);
 
 	var buttonEnabled = new _rx.BehaviorSubject(false);
-	bothEnabled.subscribe(buttonEnabled);
+	bothPresence.subscribe(buttonEnabled);
 	buttonEnabled.subscribe(function (enabled) {
 	  return button.disabled = !enabled;
 	});

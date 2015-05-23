@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "react": "^0.13.3",
     "rx": "^2.5.2"
   },
   "devDependencies": {

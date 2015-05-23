@@ -1,0 +1,21 @@
+{
+  "name": "rsjx-is-also-good",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "rx": "^2.5.2"
+  },
+  "devDependencies": {
+    "babel-core": "^5.4.7",
+    "babel-loader": "^5.1.3",
+    "node-libs-browser": "^0.5.2",
+    "webpack": "^1.9.8"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Mario Uher <uher.mario@gmail.com>",
+  "license": "MIT"
+}

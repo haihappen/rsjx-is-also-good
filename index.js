@@ -1,21 +1,25 @@
 import Rx, { Observable, BehaviourSubject } from 'rx';
 
 
-let username = Observable.fromEvent(document.querySelector('input[name=username]'), 'keyup');
-username = username.map((e) => e.target.value)
-let usernameEnabled = username.map((v) => v.length > 0)
+
+let targetValue = (e) => e.target.value;
+let presence = (v) => !!v.length;
+let and = (a, b) => a && b;
 
 
-let fullname = Observable.fromEvent(document.querySelector('input[name=fullname]'), 'keyup');
-fullname = fullname.map((e) => e.target.value)
-let fullnameEnabled = fullname.map((v) => v.length > 0)
+let usernameEnabled = Observable.fromEvent(document.querySelector('input[name=username]'), 'keyup')
+  .map(targetValue)
+  .map(presence);
+
+let fullnameEnabled = Observable.fromEvent(document.querySelector('input[name=fullname]'), 'keyup')
+  .map(targetValue)
+  .map(presence);
 
 
 let button = document.querySelector('button');
-let bothEnabled = Observable.combineLatest(usernameEnabled, fullnameEnabled, (a, b) => a && b);
+let bothEnabled = Observable.combineLatest(usernameEnabled, fullnameEnabled, and);
 
 
 let buttonEnabled = new Rx.BehaviorSubject(false);
-bothEnabled.subscribe(buttonEnabled)
-
+bothEnabled.subscribe(buttonEnabled);
 buttonEnabled.subscribe((enabled) => button.disabled = !enabled);

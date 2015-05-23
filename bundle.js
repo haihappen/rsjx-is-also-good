@@ -52,30 +52,25 @@
 
 	var _rx2 = _interopRequireDefault(_rx);
 
-	var username = _rx.Observable.fromEvent(document.querySelector('input[name=username]'), 'keyup');
-	username = username.map(function (e) {
+	var targetValue = function targetValue(e) {
 	  return e.target.value;
-	});
-	var usernameEnabled = username.map(function (v) {
-	  return v.length > 0;
-	});
+	};
+	var presence = function presence(v) {
+	  return !!v.length;
+	};
+	var and = function and(a, b) {
+	  return a && b;
+	};
 
-	var fullname = _rx.Observable.fromEvent(document.querySelector('input[name=fullname]'), 'keyup');
-	fullname = fullname.map(function (e) {
-	  return e.target.value;
-	});
-	var fullnameEnabled = fullname.map(function (v) {
-	  return v.length > 0;
-	});
+	var usernameEnabled = _rx.Observable.fromEvent(document.querySelector('input[name=username]'), 'keyup').map(targetValue).map(presence);
+
+	var fullnameEnabled = _rx.Observable.fromEvent(document.querySelector('input[name=fullname]'), 'keyup').map(targetValue).map(presence);
 
 	var button = document.querySelector('button');
-	var bothEnabled = _rx.Observable.combineLatest(usernameEnabled, fullnameEnabled, function (a, b) {
-	  return a && b;
-	});
+	var bothEnabled = _rx.Observable.combineLatest(usernameEnabled, fullnameEnabled, and);
 
 	var buttonEnabled = new _rx2['default'].BehaviorSubject(false);
 	bothEnabled.subscribe(buttonEnabled);
-
 	buttonEnabled.subscribe(function (enabled) {
 	  return button.disabled = !enabled;
 	});
